@@ -26,8 +26,13 @@ export default {
       //this.$store.state.counter++;
       //app의 메소드에서 store 데이터를 직접 건드리는 것은 비추
 
-      this.$store.commit('increase', { value: 10 });
+      //this.$store.commit('increase', { value: 10 });
       // commit 빌트인 메소드 뮤테이션 안에 정의한 메소드 불러오기
+
+      this.$store.dispatch({
+        type: 'increase',
+        value: 10
+      });
     }
   }
 };

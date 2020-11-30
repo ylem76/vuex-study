@@ -21,6 +21,21 @@ const store = createStore({
       state.counter = state.counter + payload.value;
     }
   },
+  actions: {
+    increment(context) {
+      //mutation과 동일한 이름 사용 가능
+      //context : vuex 기본 인자
+      setTimeout(function() {
+        context.commit('increment');
+        //payload 등도 사용 가능
+      }, 2000);
+      //2초 뒤에 increment를 commit한다.
+    },
+    increase(context, payload) {
+      console.log(context);
+      context.commit('increase', payload);
+    }
+  },
   getters: {
     finalCounter(state) {
       return state.counter * 3;
@@ -28,7 +43,10 @@ const store = createStore({
     normalizedCounter(_, getters) {
       // _ : 두번째 인수를 사용하기 위해 빈칸을 다음과 같이 적는다.
       //변수 finalCounter는 getters에 정의한 finalCounter와 동일하다.
+
+      //다른 getters 이용해서 작업하기
       const finalCounter = getters.finalCounter;
+
       //const finalCounter = state.counter * 3;
       if (finalCounter < 0) {
         return 0;
