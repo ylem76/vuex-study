@@ -1,23 +1,30 @@
 <template>
   <base-container title="Vuex">
     <the-counter></the-counter>
-    <button @click="addOne">add 1</button>
+    <button @click="addOne">add 10</button>
+    <change-counter></change-counter>
   </base-container>
 </template>
 
 <script>
 import BaseContainer from './components/BaseContainer.vue';
 import TheCounter from './components/TheCounter.vue';
+import ChangeCounter from './components/ChangeCounter.vue';
 
 export default {
   components: {
     BaseContainer,
-    TheCounter
+    TheCounter,
+    ChangeCounter
   },
 
   methods: {
     addOne() {
-      this.$store.state.counter++;
+      //this.$store.state.counter++;
+      //app의 메소드에서 store 데이터를 직접 건드리는 것은 비추
+
+      this.$store.commit('increase', { value: 10 });
+      // commit 빌트인 메소드 뮤테이션 안에 정의한 메소드 불러오기
     }
   }
 };
