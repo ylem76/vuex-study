@@ -25,8 +25,11 @@ const store = createStore({
     finalCounter(state) {
       return state.counter * 3;
     },
-    normalizedCounter(state) {
-      const finalCounter = state.counter * 3;
+    normalizedCounter(_, getters) {
+      // _ : 두번째 인수를 사용하기 위해 빈칸을 다음과 같이 적는다.
+      //변수 finalCounter는 getters에 정의한 finalCounter와 동일하다.
+      const finalCounter = getters.finalCounter;
+      //const finalCounter = state.counter * 3;
       if (finalCounter < 0) {
         return 0;
       }
