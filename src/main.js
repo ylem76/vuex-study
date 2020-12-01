@@ -8,7 +8,8 @@ import App from './App.vue';
 const store = createStore({
   state() {
     return {
-      counter: 0
+      counter: 0,
+      isLoggedIn: false
     };
   },
   mutations: {
@@ -19,6 +20,9 @@ const store = createStore({
     },
     increase(state, payload) {
       state.counter = state.counter + payload.value;
+    },
+    setAuth(state, payload) {
+      state.isLoggedIn = payload.isAuth;
     }
   },
   actions: {
@@ -34,6 +38,12 @@ const store = createStore({
     increase(context, payload) {
       console.log(context);
       context.commit('increase', payload);
+    },
+    login(context) {
+      context.commit('setAuth', { isAuth: true });
+    },
+    logout(context) {
+      context.commit('setAuth', { isAuth: false });
     }
   },
   getters: {
@@ -55,6 +65,10 @@ const store = createStore({
         return 100;
       }
       return finalCounter;
+    },
+    userIsAuthenticated(state) {
+      return state.isLoggedIn;
+      //mutation의 isLoggedIn 상태를 업데이트 한다.
     }
   }
 });
